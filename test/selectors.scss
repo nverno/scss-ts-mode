@@ -1,0 +1,42 @@
+* {}
+
+div, span {}
+h1, h2, h3, h4 {}
+
+.class-a {}
+div.class-b, .class-c.class-d {}
+
+#some-id, a#another-id {}
+
+[a] {}
+[b=c] {}
+[d~=e] {}
+a[b] {}
+
+a:hover {}
+:nth-child(2) {}
+
+a::first-line {}
+
+a > b {}
+c > d > e {}
+
+a b {}
+c d e {}
+
+a {
+  &.b {}
+  & c {}
+  & > d {}
+  &e {}
+}
+
+a.b ~ c.d {}
+.e.f + .g.h {}
+
+a:not(:hover) {}
+.b:not(c > .d) {}
+
+html {
+  .foo & {}
+}

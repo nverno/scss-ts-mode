@@ -1,0 +1,142 @@
+@import url("fineprint.css") print;
+@import url("bluish.css") speech;
+@import 'custom.css';
+@import url("chrome://communicator/skin/");
+@import "common.css" screen;
+
+/* Default namespace */
+@namespace url(XML-namespace-URL);
+@namespace "XML-namespace-URL";
+@namespace url(http://www.w3.org/1999/xhtml);
+@namespace svg url(http://www.w3.org/2000/svg);
+
+/* Prefixed namespace */
+@namespace prefix url(XML-namespace-URL);
+@namespace prefix "XML-namespace-URL";
+
+@keyframes important1 {
+  from { margin-top: 50px; }
+  50%  { margin-top: 150px !important; } /* ignored */
+  to   { margin-top: 100px; }
+}
+
+@media screen and (min-width: 30em) and (orientation: landscape) {}
+@media (min-height: 680px), screen and (orientation: portrait) {}
+@media not all and (monochrome) {}
+@media only screen {}
+
+@supports (animation-name: test) {
+  div { animation-name: test; }
+}
+@supports (transform-style: preserve) or (-moz-transform-style: preserve) {}
+@supports not ((text-align-last: justify) or (-moz-text-align-last: justify)) {}
+@supports not selector(:matches(a, b)) {}
+
+@charset "utf-8";
+
+@font-face {
+  font-family: "Open Sans";
+  src: url("/a") format("woff2"), url("/b/c") format("woff");
+}
+
+// https://awardwinningfjords.com/2010/04/09/example-scss-sassy-css-file.html
+
+html {
+  background: url(https://google.com);
+}
+
+@use 'custom.css';
+
+.inverse {
+  background-color: base.$primary-color;
+  color: white;
+}
+
+@forward 'custom.css';
+
+.foo {
+  @include bar;
+  @include transform(50px, $float: left);
+}
+
+.foo {
+  @extend red;
+  .bar {
+    @extend blue;
+    @extend .green;
+  }
+}
+
+@apply fill-red-50 border-black col-span-1;
+
+article[role="main"] {
+  width: 600px / 960px * 100%;
+}
+
+.icon-#{$name} {
+  position: absolute;
+  #{$top-or-bottom}: 0;
+}
+
+@mixin avatar($size, $circle: false) {
+  width: $size;
+  height: $size;
+
+  @if $circle {
+    border-radius: $size / 2;
+  }
+}
+
+@mixin theme-colors($light-theme: true) {
+  @if $light-theme {
+    color: $light-text;
+  } @else {
+    color: $dark-text;
+  }
+}
+
+@mixin triangle($direction) {
+  @if $direction == up {
+    border-bottom-color: $color;
+  } @else if $direction == right {
+    border-left-color: $color;
+  } @else if $direction == down {
+    border-top-color: $color;
+  } @else {
+    border-right-color: $color;
+  }
+}
+
+@each $size in $sizes {
+  .icon-#{$size} {
+    font-size: $size;
+  }
+}
+
+@for $i from 1 through 3 {
+  background-color: lighten($base-color, $i * 5%);
+}
+
+@while $i < 3 {
+  background-color: lighten($base-color, $i * 5%);
+  $i: $i + 1;
+}
+
+@function pow($base, $exponent) {
+  $result: 1;
+  @for $_ from 1 through $exponent {
+    $result: $result * $base;
+  }
+  @return $result;
+}
+
+.sidebar {
+  float: left;
+  margin-left: pow(4, 3) * 1px;
+}
+
+@mixin foo {
+  @debug "debug";
+  @warn "warn";
+  @error "error";
+}

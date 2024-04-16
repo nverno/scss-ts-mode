@@ -1,0 +1,15 @@
+@import './styles/reset.scss';
+@import './styles/main.scss';
+
+#app {
+  -webkit-font-smoothing: antialiased;
+}
+
+.MoreChancesModal {
+  &_Title {
+    @extend .t--heading-tertiary;
+  }
+  &_Spacer {
+    background: red;
+  }
+}
